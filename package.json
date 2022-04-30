@@ -1,0 +1,27 @@
+{
+  "name": "goit-js-hw-11",
+  "version": "1.0.0",
+  "description": "home-work-number-11",
+  "main": "index.js",
+  "homepage": "https://nikolay-tymoshchuk.github.io/goit-js-hw-11/",
+  "scripts": {
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikolay-Tymoshchuk/goit-js-hw-11.git"
+  },
+  "author": "Nikolay Tymoshchuk <saintnikfreak@gmal.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nikolay-Tymoshchuk/goit-js-hw-11/issues"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "parcel-plugin-nuke-dist": "^1.0.1",
+    "posthtml-include": "^1.7.3",
+    "sass": "^1.50.0"
+  }
+}
