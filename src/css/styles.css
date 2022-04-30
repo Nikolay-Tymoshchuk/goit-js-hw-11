@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -28,30 +29,7 @@ header {
 label {
   position: relative;
   display: inline-flex;
-}
-
-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  height: 100%;
-  border: none;
-  padding-top: 4px;
-  background-color: #7574741e;
-  cursor: pointer;
-}
-
-button > svg {
-  fill: #757474;
-}
-
-input {
-  height: 100%;
-  padding: 0;
-  font-size: 1em;
-  outline: 1px solid tomato;
-  outline: none;
+  height: 30px;
 }
 
 .gallery-box {
@@ -75,3 +53,49 @@ input {
   height: 174px;
   object-fit: cover;
 }
+
+.search-form__input {
+  margin-right: 0;
+  border: none;
+  font-size: 0.7rem;
+  transition: width 250ms;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  width: 110px;
+  height: 100%;
+  color: #757474;
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-form__button {
+  margin-left: 0;
+  border: none;
+  font-size: 1.15em;
+  background: none;
+  color: #aaa;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  transition: color 200ms;
+  cursor: pointer;
+  transform: translateX(-100%);
+  transition: transform 250ms;
+}
+
+.search-form__button>svg{  
+  fill: #757474;
+}
+
+label:hover .search-form__input {
+  width: 160px;
+}
+label:hover .search-form__button{
+  transition: transform 250ms;
+  transform: translateX(0);
+}
+label:hover .search-form__button>svg{
+  transition: fill 250ms;
+  fill: #fff;
+}
+
