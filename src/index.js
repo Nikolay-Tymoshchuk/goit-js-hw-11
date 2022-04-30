@@ -90,3 +90,5 @@ function renderImages(arrayOfImagesData) {
 //         imageElement.alt = image.tags;
 //         imagesContainer.append(imageElement);
 //     });
+
+// final result
