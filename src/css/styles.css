@@ -29,23 +29,27 @@ header {
 label {
   position: relative;
   display: inline-flex;
+  transform: translateX(13px);
   height: 30px;
 }
 
 .gallery-box {
-  padding-top: 20px;
+  padding: 20px 0 40px 0; 
 }
 
 .container {
   width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  text-align: center;
 }
 
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .photo-card > img {
@@ -87,15 +91,31 @@ label {
   fill: #757474;
 }
 
-label:hover .search-form__input {
+label:hover .search-form__input,
+label:focus .search-form__input {
   width: 160px;
 }
-label:hover .search-form__button{
+label:hover .search-form__button,
+label:focus .search-form__button{
   transition: transform 250ms;
   transform: translateX(0);
 }
-label:hover .search-form__button>svg{
+label:hover .search-form__button>svg,
+label:focus .search-form__button>svg{
   transition: fill 250ms;
   fill: #fff;
 }
 
+.load-more {
+  padding: 5px 40px;
+  height: 30px;
+  background-color: #1d70be;
+  color: #fff;  
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.is-hidden {
+  display: none;
+}

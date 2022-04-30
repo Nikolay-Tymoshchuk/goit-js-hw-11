@@ -23,5 +23,8 @@
     "parcel-plugin-nuke-dist": "^1.0.1",
     "posthtml-include": "^1.7.3",
     "sass": "^1.50.0"
+  },
+  "dependencies": {
+    "notiflix": "^3.2.5"
   }
 }
