@@ -20,7 +20,7 @@ refs.loadBtn.addEventListener('click', onLoadMore);
 const findLastPage = (value) => Math.ceil(value.totalHits / myApiService.per_page);
 
 // Функция - обработчик события нажатия на кнопку поиска. 
-function onSubmit(event) {
+async function onSubmit(event) {
 
   // Отменяем действие по умолчанию и сбрасываем галерею с кнопкой загрузки.
   event.preventDefault();
@@ -29,26 +29,31 @@ function onSubmit(event) {
 
 
   // Проверяем значеник в поле поиска с параменту поиска в API сервисе.Выполняем блок кода, если значение в поле поиска новое.
-  if (myApiService.query !== event.currentTarget.elements.searchQuery.value) {
-    myApiService.query = event.currentTarget.elements.searchQuery.value;
-    myApiService.page = 1;
-    validationOfOutcomingResult(myApiService, true, true);
-    myApiService.page += 1;
-  }
-  // Если значение не новое, проверяем не превышает ли значение текущей станицы значение последней страницы по данному запросу
-  else {
-    if (myApiService.page >= myApiService.lastPage) {
-      myApiService.page = myApiService.lastPage;
-      validationOfOutcomingResult(myApiService)
-      endOfGalleryNotification();
-      return
-    }
-    else {
-      console.log('myApiService.lastPage before:>> ', myApiService.lastPage);
-      validationOfOutcomingResult(myApiService);
+  try {
+    if (myApiService.query !== event.currentTarget.elements.searchQuery.value) {
+      myApiService.query = event.currentTarget.elements.searchQuery.value;
+      myApiService.page = 1;
+      await validationOfOutcomingResult(myApiService, true, true);
+      myApiService.lastPage === 1 && endOfGalleryNotification();
       myApiService.page += 1;
-       console.log('myApiService.lastPage after ', myApiService.lastPage);
-    }       
+      return;
+    }
+  // Если значение не новое, проверяем не превышает ли значение текущей станицы значение последней страницы по данному запросу
+    else {
+      if (myApiService.page >= myApiService.lastPage) {
+        myApiService.page = myApiService.lastPage;
+        await validationOfOutcomingResult(myApiService);
+        await endOfGalleryNotification();
+        return
+      }
+      else {
+        await validationOfOutcomingResult(myApiService);
+        myApiService.page += 1;
+        return
+      } 
+    }
+  } catch (error) {
+      Notify.failure(error.name);
   }
 }
 
@@ -101,24 +106,19 @@ function renderImages(arrayOfImagesData) {
  */
 
 async function validationOfOutcomingResult(data, notify, setLastPage) {
-  try {
     const fetchingRequest = await data.fetchData();      
     renderImages(fetchingRequest.hits);
     fetchingRequest.totalHits > data.per_page && refs.loadBtn.classList.remove('is-hidden');
 
     notify && notificationByFetchedResults(fetchingRequest.totalHits);
     setLastPage && (myApiService.lastPage = findLastPage(fetchingRequest));
-  } catch (error) {
-    Notify.failure(error.name);
-  }
 }
 
 // Функция уведомления о последней странице по данному запросу. Скрывает кнопку подгрузки изображений.
 function endOfGalleryNotification() {
   const message = "You have reached the end of search results"
   refs.loadBtn.classList.add('is-hidden');
-  Notify.info(message, { timeout: 4000, clickToClose: true, position: 'center-bottom' });
+  Notify.info(message);
   myApiService.page = 1;
-  return
 }
 
