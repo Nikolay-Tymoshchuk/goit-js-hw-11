@@ -7,7 +7,8 @@ export default class NewsApiService {
         this.SAFESEARCH = 'true';
         this.BASE_URL = 'https://pixabay.com/api/';
         this.page = 1;
-        this.per_page = 20;
+      this.per_page = 20;
+      this.lastPage = 1;
     }
     
     getOptions() {
