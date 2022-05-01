@@ -38,22 +38,4 @@ export default class NewsApiService {
         this.searchQuery = value;
     }
 
-
-
-    
-//   get(url) {
-//     return this.apiService.get(url);
-//   }
-
-//   post(url, data) {
-//     return this.apiService.post(url, data);
-//   }
-
-//   put(url, data) {
-//     return this.apiService.put(url, data);
-//   }
-
-//   delete(url) {
-//     return this.apiService.delete(url);
-//   }
 }
