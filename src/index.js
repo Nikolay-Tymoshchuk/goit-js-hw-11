@@ -70,14 +70,11 @@ async function onSubmit(event) {
 async function onLoadMore() {
   refs.formEl.reset();
 
-  try {
-    const fetchingRequest = await myApiService.fetchData().then;
-    renderImages(fetchingRequest.hits);
-    myApiService.page === myApiService.lastPage && endOfGalleryNotification();
-    myApiService.page += 1;
-  } catch (error) {
-    Notify.failure(error.name);
-  } 
+  
+  myApiService.fetchData().then(data => renderImages(data.hits)).catch(error => Notify.failure(error.name));
+  myApiService.page === myApiService.lastPage && endOfGalleryNotification();
+  myApiService.page += 1;
+  
 }
 
 
