@@ -1,6 +1,7 @@
 import renderCardTpl from './templates/render-card.hbs';
 import { Notify } from 'notiflix';
 import NewsApiService from './js/api-service';
+import MyError from './js/myError';
 const refs = {
     searchField: document.body.querySelector('.search-form__input'),
     formEl: document.body.querySelector('.search-form'),
@@ -38,7 +39,7 @@ async function onSubmit(event) {
       myApiService.page += 1;
       return;
     }
-  // Если значение не новое, проверяем не превышает ли значение текущей станицы значение последней страницы по данному запросу
+    // Если значение не новое, проверяем не превышает ли значение текущей станицы значение последней страницы по данному запросу
     else {
       if (myApiService.page >= myApiService.lastPage) {
         myApiService.page = myApiService.lastPage;
@@ -50,10 +51,18 @@ async function onSubmit(event) {
         await validationOfOutcomingResult(myApiService);
         myApiService.page += 1;
         return
-      } 
+      }
     }
   } catch (error) {
-      Notify.failure(error.name);
+    if (error instanceof MyError) {
+            Notify.failure(error.message);
+        }
+        else if (error instanceof TypeError) {
+            Notify.failure("Expected JSON response but got " + type);
+        }
+        else {
+            Notify.failure(error.message);
+        }
   }
 }
 
@@ -62,7 +71,7 @@ async function onLoadMore() {
   refs.formEl.reset();
 
   try {
-    const fetchingRequest = await myApiService.fetchData();
+    const fetchingRequest = await myApiService.fetchData().then;
     renderImages(fetchingRequest.hits);
     myApiService.page === myApiService.lastPage && endOfGalleryNotification();
     myApiService.page += 1;
@@ -79,7 +88,7 @@ function notificationByFetchedResults(lengthOfResultedArray) {
   const messaheIfFoundedMany = `We found ${lengthOfResultedArray} images.`;
 
   if (lengthOfResultedArray === 0) {
-    Notify.failure(messageIfNotFounded);
+    throw new MyError(messageIfNotFounded);
   } else if (lengthOfResultedArray === 1) {
     Notify.success(messageIfFoundOne);
   } else {

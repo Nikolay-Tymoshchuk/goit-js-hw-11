@@ -1,3 +1,5 @@
+import MyError from './myError';
+
 export default class NewsApiService {
   constructor() {
         this.searchQuery = '';
@@ -25,10 +27,19 @@ export default class NewsApiService {
         return searchParams;
     }     
 
-    async fetchData() {
-        const response = await fetch(`${this.BASE_URL}?${this.getOptions()}`);
-        const data = await response.json();
-        return data;
+    fetchData() {
+        return fetch(`${this.BASE_URL}?${this.getOptions()}`).then(res => {
+
+            if (res.status === 400) {
+                throw new MyError("Sorry, there are no images matching your search query. Please try again.");
+            }
+
+            let type = res.headers.get('Content-Type');
+            if (type !== 'application/json') {
+                throw new TypeError();
+            }
+        return res.json();
+        });
     }
     
     get query() {
