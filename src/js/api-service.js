@@ -29,7 +29,6 @@ export default class NewsApiService {
 
     fetchData() {
         return fetch(`${this.BASE_URL}?${this.getOptions()}`).then(res => {
-
             if (res.status === 400) {
                 throw new MyError("Sorry, there are no images matching your search query. Please try again.");
             }
@@ -39,7 +38,7 @@ export default class NewsApiService {
                 throw new TypeError();
             }
         return res.json();
-        });
+        }).then(data => (console.log(data), data));
     }
     
     get query() {

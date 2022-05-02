@@ -2,6 +2,8 @@ import renderCardTpl from './templates/render-card.hbs';
 import { Notify } from 'notiflix';
 import NewsApiService from './js/api-service';
 import MyError from './js/myError';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 const refs = {
     searchField: document.body.querySelector('.search-form__input'),
     formEl: document.body.querySelector('.search-form'),
@@ -85,7 +87,7 @@ function notificationByFetchedResults(lengthOfResultedArray) {
   const messaheIfFoundedMany = `We found ${lengthOfResultedArray} images.`;
 
   if (lengthOfResultedArray === 0) {
-    throw new MyError(messageIfNotFounded);
+    Notify.failure(messageIfNotFounded);
   } else if (lengthOfResultedArray === 1) {
     Notify.success(messageIfFoundOne);
   } else {
@@ -96,7 +98,8 @@ function notificationByFetchedResults(lengthOfResultedArray) {
 // Функция отрисовки изображений в галерее. Принимает массив объектов изображений. Результат - разметка галереи.
 function renderImages(arrayOfImagesData) {
     const markup = arrayOfImagesData.map(image => renderCardTpl({image})).join('');
-    refs.gallery.insertAdjacentHTML('beforeend', markup);
+  refs.gallery.insertAdjacentHTML('beforeend', markup);
+  const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250, refresh: true });
 }
 
 
@@ -113,7 +116,7 @@ function renderImages(arrayOfImagesData) {
 
 async function validationOfOutcomingResult(data, notify, setLastPage) {
     const fetchingRequest = await data.fetchData();      
-    renderImages(fetchingRequest.hits);
+    await renderImages(fetchingRequest.hits);
     fetchingRequest.totalHits > data.per_page && refs.loadBtn.classList.remove('is-hidden');
 
     notify && notificationByFetchedResults(fetchingRequest.totalHits);

@@ -1,17 +1,23 @@
-<div class="photo-card">
-  <img src="{{image.webformatURL}}" alt="{{image.tags}}" loading="lazy" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes{{image.likes}}</b>
-    </p>
-    <p class="info-item">
-      <b>Views{{image.views}}</b>
-    </p>
-    <p class="info-item">
-      <b>Comments{{image.comments}}</b>
-    </p>
-    <p class="info-item">
-      <b>Downloads{{image.downloads}}</b>
-    </p>
+<a href="{{image.largeImageURL}}">
+  <div class="photo-card">
+    <img src="{{image.webformatURL}}" alt="{{image.tags}}" loading="lazy" />
+    <div class="info">
+      <span class="info-item">
+        <p><b>Likes</b></p>
+        <span>{{image.likes}}</span>
+      </span>
+      <span class="info-item">
+        <p><b>Comments</b></p>
+        <span>{{image.comments}}</span>
+      </span>
+      <span class="info-item">
+        <p><b>Views</b></p>
+        <span>{{image.views}}</span>
+      </span>
+      <span class="info-item">
+        <p><b>Downloads</b></p>
+        <span>{{image.downloads}}</span>
+      </span>
+    </div>
   </div>
-</div>
+</a>
