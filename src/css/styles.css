@@ -94,12 +94,14 @@ label {
   transition: all 250ms ease-in-out;
 }
 
-.photo-card:hover {
-  filter: contrast(80%);
+.photo-card:hover >img{
+  transform: scale(1.02);
+  filter: drop-shadow(8px 8px 5px rgba(71, 71, 71, 0.418));
   transition: all 250ms ease-in-out;
 }
 
 .photo-card > img {
+  transition: all 250ms ease-in-out;
   width: 100%;
   height: 174px;
   object-fit: cover;
