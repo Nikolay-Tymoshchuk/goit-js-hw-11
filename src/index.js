@@ -68,12 +68,10 @@ async function onSubmit(event) {
   }
 }
 
-// Функция - обработчик кнопки подгрузки изображений.
+// Функция - обработчик кнопки подгрузки изображений. Делаем плавный скролл 
 async function onLoadMore() {
   refs.formEl.reset();
-
-  
-  myApiService.fetchData().then(data => renderImages(data.hits)).catch(error => Notify.failure(error.name));
+  myApiService.fetchData().then(data => renderImages(data.hits)).then(data => smoothScroll(data)).catch(error => Notify.failure(error.name));
   myApiService.page === myApiService.lastPage && endOfGalleryNotification();
   myApiService.page += 1;
   
@@ -131,3 +129,8 @@ function endOfGalleryNotification() {
   myApiService.page = 1;
 }
 
+function smoothScroll() {
+  const { height: cardHeight } = document.querySelector(".gallery").firstElementChild.getBoundingClientRect();
+  console.log(cardHeight);
+  window.scrollBy({top: cardHeight*3, behavior: 'smooth'});
+}
