@@ -1,0 +1,49 @@
+.header__link{
+    // display: none;
+    align-items: flex-end;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+        display: flex;
+        transform: translateX(40%);
+    }
+    @media screen and (min-width: 1200px) {
+        display: flex;
+        transform: translateX(100%);
+    }
+}
+
+.header__link-word{
+    display: none;
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    margin-right: 10px;
+    padding: 0;
+    color: white;
+
+    @media screen and (min-width: 1200px) {
+        display: block;
+    }
+}
+
+.header__logo {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+    }
+}
+
+.header__logo-mobile {
+    display: block;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+}
+
+@import "./form";

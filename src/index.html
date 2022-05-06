@@ -10,18 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Raleway&family=Varela+Round&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./sass/main.scss" />
     <title>Homework 11</title>
   </head>
   <body>
     <header>
-      <div class="container">
-        <a href="https://nikolay-tymoshchuk.github.io/goit-js-hw-11/">
-          <span class="thanks">Thanks </span>
-          <img src="./images/logo_min.svg" alt="Pixabay logo" />
+      <div class="container header__container">
+        <a href="https://nikolay-tymoshchuk.github.io/goit-js-hw-11/" class="header__link">
+          <span class="header__link-word">Thanks </span>
+          <img class="header__logo" src="./images/logo_min.svg" alt="Pixabay logo" />
+          <img class="header__logo-mobile" src="./images/logo_short.svg" alt="Pixabay logo short" />
         </a>
         <form class="search-form" id="search-form">
-          <label>
+          <label class="search-form__label">
             <input
               class="search-form__input"
               type="text"
@@ -31,6 +32,7 @@
             />
             <button class="search-form__button" type="submit">
               <svg
+                class="search-form__button-icon"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
