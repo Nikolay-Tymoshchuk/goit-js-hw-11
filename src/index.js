@@ -10,7 +10,7 @@ const refs = {
     gallery: document.body.querySelector('.gallery'),
     loadBtn: document.body.querySelector('.load-more'),
 }
-
+Notify.init({clickToClose: true});
 const myApiService = new NewsApiService();
 
 
