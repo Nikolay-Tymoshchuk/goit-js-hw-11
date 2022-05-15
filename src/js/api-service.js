@@ -38,7 +38,7 @@ export default class NewsApiService {
                 throw new TypeError();
             }
         return res.json();
-        }).then(data => (console.log(data), data));
+        }).then(data => (console.log(data), data))
     }
     
     get query() {
