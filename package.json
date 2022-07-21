@@ -1,21 +1,21 @@
 {
-  "name": "goit-js-hw-11",
+  "name": "image-finder",
   "version": "1.0.0",
-  "description": "home-work-number-11",
+  "description": "find image with pixabay api",
   "main": "index.js",
-  "homepage": "https://nikolay-tymoshchuk.github.io/goit-js-hw-11/",
+  "homepage": "https://nikolay-tymoshchuk.github.io/image-finder/",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
+    "build": "parcel build src/*.html --public-url /image-finder/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nikolay-Tymoshchuk/goit-js-hw-11.git"
+    "url": "git+https://github.com/Nikolay-Tymoshchuk/image-finder.git"
   },
   "author": "Nikolay Tymoshchuk <saintnikfreak@gmal.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nikolay-Tymoshchuk/goit-js-hw-11/issues"
+    "url": "https://github.com/Nikolay-Tymoshchuk/image-finder/issues"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
