@@ -28,12 +28,12 @@ async function onSubmit(event) {
   refs.gallery.innerHTML = '';
   refs.loadBtn.classList.add('is-hidden');
 
-  // Проверяем значение в поле поиска с параметром поиска в API сервисе.Выполняем блок кода, если значение в поле поиска новое.
+  // Проверяем значение в поле поиска с параметру поиска в API сервисе.Выполняем блок кода, если значение в поле поиска новое.
   try {
     if (myApiService.query !== event.currentTarget.elements.searchQuery.value) {
       myApiService.query = event.currentTarget.elements.searchQuery.value;
       myApiService.page = 1;
-      validationOfOutcomingResult(myApiService, true, true);
+      await validationOfOutcomingResult(myApiService, true, true);
       myApiService.lastPage === 1 && endOfGalleryNotification();
       myApiService.page += 1;
       return;
@@ -65,7 +65,7 @@ async function onSubmit(event) {
 // Функция - обработчик кнопки подгрузки изображений. Делаем плавный скролл
 async function onLoadMore() {
   refs.formEl.reset();
-  myApiService
+  await myApiService
     .fetchData()
     .then(data => renderImages(data.hits))
     .then(data => smoothScroll(data))
@@ -79,14 +79,14 @@ function notificationByFetchedResults(lengthOfResultedArray) {
   const messageIfNotFounded =
     'Sorry, there are no images matching your search query. Please try again.';
   const messageIfFoundOne = `You are lucky! We found 1 image.`;
-  const messageIfFoundedMany = `We found ${lengthOfResultedArray} images.`;
+  const messaheIfFoundedMany = `We found ${lengthOfResultedArray} images.`;
 
   if (lengthOfResultedArray === 0) {
     Notify.failure(messageIfNotFounded);
   } else if (lengthOfResultedArray === 1) {
     Notify.success(messageIfFoundOne);
   } else {
-    Notify.success(messageIfFoundedMany);
+    Notify.success(messaheIfFoundedMany);
   }
 }
 
@@ -133,5 +133,6 @@ function smoothScroll() {
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
+  console.log(cardHeight);
   window.scrollBy({ top: cardHeight * 3, behavior: 'smooth' });
 }
