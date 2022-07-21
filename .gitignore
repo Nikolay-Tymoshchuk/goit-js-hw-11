@@ -102,6 +102,9 @@ dist
 # FuseBox cache
 .fusebox/
 
+# Windows files
+.ini
+
 # DynamoDB Local files
 .dynamodb/
 
